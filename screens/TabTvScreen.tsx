@@ -34,11 +34,13 @@ export default function TabTv() {
 
       <View style={styles.timeline}>
         <ScrollView style={styles.timelineContainer}>
-          {alltv.hasOwnProperty('results') && alltv.results.map((item, index) =>
+          {alltv.results.length ? alltv.results.map((item, index) =>
             <View key={item.id} style={styles.photoContainer}>
               <Movie item={item} />
             </View>
-          )}
+          ) :
+            <Text> TV Drama not found!</Text>
+          }
         </ScrollView>
       </View >
     </View >

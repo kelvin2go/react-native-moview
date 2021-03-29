@@ -14,6 +14,9 @@ if (width > 500) {
 }
 const IMG_BASE = `${Constants.manifest.extra.IMG_BASE}${imageSize}`
 
+const emToPx = (em) => {
+    return em * 16
+}
 const styles = StyleSheet.create({
     btnContainer: {
         flexDirection: 'row',
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         borderBottomWidth: 1,
         borderColor: 'rgb(230,230,230)',
-        fontSize: '1.5em',
+        fontSize: emToPx(1.5),
     },
     image: {
         width: width,
@@ -47,10 +50,10 @@ const styles = StyleSheet.create({
         zIndex: 3,
         right: 9,
         top: 9,
-        fontSize: '1em',
+        fontSize: emToPx(1),
         borderRadius: 10,
-        height: '3em',
-        width: '3em',
+        height: emToPx(3),
+        width: emToPx(3),
     },
     pCircleContainer: {
         position: 'absolute',
@@ -60,14 +63,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     rating: {
-        textAlignVertical: 'middle',
         textAlign: 'center',
         color: '#fff',
         backgroundColor: 'transparent',
-        height: '2em',
-        width: '2em',
-        fontSize: '3em',
-        lineHeight: '2em'
+        height: emToPx(2),
+        width: emToPx(2),
+        fontSize: emToPx(3),
+        lineHeight: emToPx(2)
 
     }
 });
@@ -80,7 +82,8 @@ export function Movie({ item }: { item: any }) {
         <View>
             <View style={styles.titleContainer}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ fontSize: '1.3em', fontWeight: '500' }}> {item.title || item.name}</Text>
+                    <Text
+                        style={{ paddingLeft: 15, fontSize: emToPx(1.4), fontWeight: '500' }}> {item.title || item.name}</Text>
                 </View >
             </View>
             <Image style={styles.image} source={{ uri: `${IMG_BASE}${item.poster_path}` }} />

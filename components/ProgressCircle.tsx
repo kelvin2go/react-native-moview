@@ -2,56 +2,46 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text } from '../components/Themed';
 
+const emToPx = (em) => {
+    return em * 16
+}
+
 const styles = StyleSheet.create({
     progressContainer: {
-        margin: 15,
+        margin: emToPx(0.2),
         position: 'relative',
-        height: '1em',
-        width: '1em',
-        fontSize: '10em',
+        height: emToPx(3),
+        width: emToPx(3),
+        fontSize: emToPx(4),
         backgroundColor: 'transparent',
     },
     pieContainer: {
         left: 0,
         position: 'absolute',
         top: 0,
-        height: `100%`,
-        width: `100%`,
+        height: `110%`,
+        width: `110%`,
         backgroundColor: 'transparent',
     },
     label: {
-        borderRadius: '50%',
+        borderRadius: emToPx(3),
         color: '#ecf0f1',
-        cursor: 'default',
-        display: 'block',
-        fontSize: '0.25em',
+        fontSize: emToPx(1.6),
+        fontWeight: 'bold',
         position: 'absolute',
         textAlign: 'center',
-        right: '0.4em',
-        top: '0.4em',
-        left: '0.4em',
-        lineHeight: '2.8em',
+        top: `${emToPx(1)}%`,
+        left: `${emToPx(1)}%`,
+        height: `100%`,
+        width: `100%`,
+        lineHeight: emToPx(2.7),
         backgroundColor: '#34495e',
-        bottom: '0.4em',
         zIndex: 5,
     },
     smaller: {
         color: '#bdc3c7',
-        fontSize: '.45em',
-        paddingBottom: 20,
-        textVerticalAlign: 'super',
+        fontSize: emToPx(0.6),
     },
-    circle: {
-        height: '100%',
-        width: '100%',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        backgroundColor: 'transparent',
-        borderRadius: `50%`,
-        zIndex: 3,
-        border: `0.1em solid`,
-    }
 })
 
 export function ProgressCircle({ item }: { item: any }) {
@@ -64,14 +54,14 @@ export function ProgressCircle({ item }: { item: any }) {
         left: 0,
         top: 0,
         backgroundColor: 'transparent',
-        borderRadius: `50%`,
+        borderRadius: emToPx(2),
         zIndex: 3,
-        border: `0.1em solid`,
+        borderWidth: emToPx(2),
+        borderStyle: `solid`,
     }
     const leftSide = {
         borderColor: $color,
         ...circle,
-        transform: `rotate(${parseInt($progress * 36) % 10000 / 10}deg)`,
     }
     return (
         <View style={styles.progressContainer}>

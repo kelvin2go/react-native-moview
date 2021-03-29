@@ -34,11 +34,13 @@ export default function TabMovies() {
 
       <View style={styles.timeline}>
         <ScrollView style={styles.timelineContainer}>
-          {allMovies.hasOwnProperty('results') && allMovies.results.map((item, index) =>
+          {allMovies.results.length ? allMovies.results.map((item,) =>
             <View key={item.id} style={styles.photoContainer}>
               <Movie item={item} />
             </View>
-          )}
+          ) :
+            <Text>Movies not found!</Text>
+          }
         </ScrollView>
       </View >
     </View >

@@ -67,7 +67,7 @@ function TabTVNavigator() {
       <TabTvStack.Screen
         name="TV"
         component={TV}
-        options={{ headerTitle: 'Tv Drama' }}
+        options={{ headerTitle: 'TV Drama' }}
       />
     </TabTvStack.Navigator>
   );

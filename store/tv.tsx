@@ -34,7 +34,12 @@ const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchtv.pending, (state) => {
-            state.tv = [];
+            state.tv = {
+                page: 1,
+                results: [],
+                total_pages: 1000,
+                total_results: 20000,
+            };
             state.loading = "loading";
         });
         builder.addCase(
