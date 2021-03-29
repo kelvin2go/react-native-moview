@@ -6,16 +6,16 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Movies: {
             screens: {
-              TabOneScreen: 'one',
+              Movies: 'Movies',
             },
           },
-          TabTwo: {
+          TV: {
             screens: {
-              TabTwoScreen: 'two',
-            },
-          },
+              TV: 'TV'
+            }
+          }
         },
       },
       NotFound: '*',
