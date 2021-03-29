@@ -2,7 +2,10 @@
 Moview - movie review try on react native with react toolkit
 
 EXPO QR code 
+
 ![alt text](assets/messageImage_1617024372084.jpg)
+
+https://expo.io/@kelvin2go/projects/moview
 
 .env 
 .extra
