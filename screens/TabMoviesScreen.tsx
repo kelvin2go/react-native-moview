@@ -9,12 +9,24 @@ import { Movie } from '../components/Movie';
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../store/movies';
 
+
+const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+  const paddingToBottom = 20;
+  return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+};
+
+
 export default function TabMovies() {
   const dispatch = useDispatch();
   const allMovies = useSelector((state: RootState) => {
-    return state.movies.movies || {
+    return {
+      ...state.movies.movies,
+      results: [
+        ...state.movies.loadedMovies,
+      ]
+    } || {
       page: 1,
-      results: [],
+      results: state.movies.loadedMovies || [],
       total_pages: 1000,
       total_results: 20000,
     }
@@ -22,24 +34,31 @@ export default function TabMovies() {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      dispatch(fetchMovies());
+      dispatch(fetchMovies({}));
       return () => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
     }, [dispatch])
   );
+
   return (
     <View style={styles.container}>
-
       <View style={styles.timeline}>
-        <ScrollView style={styles.timelineContainer}>
-          {allMovies.results.length ? allMovies.results.map((item,) =>
+        <ScrollView style={styles.timelineContainer} onScroll={({ nativeEvent }) => {
+          if (isCloseToBottom(nativeEvent)) {
+            dispatch(fetchMovies({ page: allMovies.page + 1 }));
+          }
+        }}>
+          {allMovies.results.length ? allMovies.results.map((item, index) =>
             <View key={item.id} style={styles.photoContainer}>
-              <Movie item={item} />
+              <Movie item={{
+                index: index + 1,
+                ...item
+              }} />
             </View>
           ) :
-            <Text>Movies not found!</Text>
+            <View><Text>Movies not found!</Text></View >
           }
         </ScrollView>
       </View >

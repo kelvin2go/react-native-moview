@@ -2,15 +2,15 @@ import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit'
 import TmAxios from '../axios/tmdb';
 
 export const fetchMovies = createAsyncThunk(
-    "movies/fetchMovies", async (_, thunkAPI) => {
+    "movies/fetchMovies", async (params: any, thunkAPI) => {
+        console.log('calling', params)
         try {
-            const response = await TmAxios.get('trending/movie/week');
+            const response = await TmAxios.get('trending/movie/week', { params });
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue({ error: error.message });
         }
     });
-
 
 export const initialState = {
     movies: {
@@ -21,6 +21,7 @@ export const initialState = {
     },
     loading: 'idle',
     error: null,
+    loadedMovies: []
 }
 
 // Slice
@@ -45,6 +46,10 @@ const slice = createSlice({
         builder.addCase(
             fetchMovies.fulfilled, (state, { payload }) => {
                 state.movies = payload;
+                state.loadedMovies = [
+                    ...state.loadedMovies,
+                    ...payload.results
+                ]
                 state.loading = "loaded";
             });
         builder.addCase(
@@ -55,6 +60,3 @@ const slice = createSlice({
     }
 });
 export default slice.reducer
-
-// Action
-// const { getMovies } = slice.actions

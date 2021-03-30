@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit'
 import TmAxios from '../axios/tmdb';
 
 export const fetchtv = createAsyncThunk(
-    "tv/fetchtv", async (_, thunkAPI) => {
+    "tv/fetchtv", async (params: any, thunkAPI) => {
         try {
-            const response = await TmAxios.get('trending/tv/week');
+            const response = await TmAxios.get('trending/tv/week', { params });
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue({ error: error.message });
@@ -21,6 +21,7 @@ export const initialState = {
     },
     loading: 'idle',
     error: null,
+    loadedTv: []
 }
 
 // Slice
@@ -45,6 +46,10 @@ const slice = createSlice({
         builder.addCase(
             fetchtv.fulfilled, (state, { payload }) => {
                 state.tv = payload;
+                state.loadedTv = [
+                    ...state.loadedTv,
+                    ...payload.results
+                ]
                 state.loading = "loaded";
             });
         builder.addCase(

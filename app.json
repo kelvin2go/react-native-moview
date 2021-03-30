@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "moview",
+    "name": "Moview",
     "slug": "moview",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,6 +29,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "This is a movie review from TMDB API with react tool kit.\n\n",
+    "githubUrl": "https://github.com/kelvin2go/react-native-moview"
   }
 }

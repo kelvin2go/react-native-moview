@@ -83,7 +83,7 @@ export function Movie({ item }: { item: any }) {
             <View style={styles.titleContainer}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
-                        style={{ paddingLeft: 15, fontSize: emToPx(1.4), fontWeight: '500' }}> {item.title || item.name}</Text>
+                        style={{ paddingLeft: 15, fontSize: emToPx(1.4), fontWeight: '500' }}>{item.index} {item.title || item.name}</Text>
                 </View >
             </View>
             <Image style={styles.image} source={{ uri: `${IMG_BASE}${item.poster_path}` }} />
